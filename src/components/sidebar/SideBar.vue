@@ -1,19 +1,36 @@
 <script>
+import axiosInstance from '@/utils/axiosInstance'
 export default {
     data: () => ({
         selectItem: 10,
         drawer: null,
         items: [
             { icon: 'mdi-view-dashboard-outline', text: 'Dashboard', to: '/dashboard' },
-            { icon: 'mdi-text-long', text: 'Subjects', to: '/subjects' },
-            { icon: 'mdi-ab-testing', text: 'Exams', to: '/exams' },
-            { icon: 'mdi-head-question-outline', text: 'Questions', to: '/questions' },
-            { icon: 'mdi-account-group-outline', text: 'Groups', to: '/groups' },
-            { icon: 'mdi-account-school-outline', text: 'Students', to: '/students' },
+            { icon: 'mdi-gesture-tap', text: 'Active exams', to: '/active-exams' },
+            { icon: 'mdi-alpha-p-box-outline', text: 'Passed exams', to: '/passed-exams' },
             { icon: 'mdi-logout', text: 'Logout', to: '/login' },
         ]
 
     }),
+    methods: {
+        async logout() {
+            await axiosInstance.delete('/auth/logout/')
+            .then(() => {
+                localStorage.removeItem('token')
+                this.$router.push('/login')
+                this.Toast.fire({
+                    icon: 'success',
+                    title: 'Student is logged out'
+                  })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        },
+        async goTo(link) {
+            this.$router.push(link)
+        }
+    },
     props: {},
     components: {
     },
@@ -29,7 +46,7 @@ export default {
                     :key="i"
                     v-slot="{active}"
                     :ripple="false"
-                    :to="item.to"
+                    @click="item.text === 'Logout' ? logout() : goTo(item.to)"
                 >
                     <v-list-item-icon>
                         <div :class="active ? 'a' : ''"></div>

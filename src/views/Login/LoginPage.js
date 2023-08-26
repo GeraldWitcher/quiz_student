@@ -51,17 +51,26 @@ export default {
           this.username = ''
           this.password = ''
         } else
-        await axiosInstance.post('auth/token-admin/', {
+        await axiosInstance.post('auth/token-student/', {
           username: this.username,
           password: this.password
         })
         .then((res) => {
-          this.$router.push('/dashboard')
-          localStorage.setItem('token', res.data.token)
-          this.Toast.fire({
-            icon: 'success',
-            title: 'Signed in successfully'
-          })
+          if (res.data.status_code == 400) {
+            console.log(res.data.message)
+            Swal.fire({
+              icon: 'question',
+              title: 'Этот пользователь уже на экзамене! Кто ты воин?',
+              showConfirmButton: false
+            })
+          } else {
+            this.$router.push('/home')
+            localStorage.setItem('token', res.data.token)
+            this.Toast.fire({
+              icon: 'success',
+              title: 'Signed in successfully'
+            }) 
+          }
         })
         .catch((err) => {
           this.Toast.fire({
