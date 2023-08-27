@@ -1,7 +1,8 @@
 import axiosInstance from "@/utils/axiosInstance";
 import Swal from "sweetalert2";
-import SideBar from '@/components/sidebar/SideBar';
 import LogoutComponent from '@/components/LogoutComponent';
+import SideBar from '@/components/sidebar/SideBar';
+import SweetalertIcon from 'vue-sweetalert-icons';
 
 export default {
     data: () => ({
@@ -15,7 +16,14 @@ export default {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
-          })
+        }),
+        exams: [
+          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
+          { name: 'Exam name', description: 'Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description', duration: '05.05.05', subject: 'Exam subject' },
+          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
+          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
+          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
+        ]
     }),
     methods: {
         async logout() {
@@ -34,7 +42,8 @@ export default {
         }
     },
     components: {
-      SideBar,
-      LogoutComponent
+        LogoutComponent,
+        SideBar,
+        SweetalertIcon    
     }
 }

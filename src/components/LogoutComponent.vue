@@ -1,7 +1,19 @@
-import axiosInstance from "@/utils/axiosInstance";
-import Swal from "sweetalert2";
-import SideBar from '@/components/sidebar/SideBar';
-import LogoutComponent from '@/components/LogoutComponent';
+<template>
+    <div>
+        <v-btn
+            elevation="0"
+            style="color: #7FBA5E; border: 1px solid #7FBA5E; background-color: transparent"
+            @click="logout"
+        >
+            <v-icon color="#7FBA5E"> mdi-logout </v-icon>
+            Logout
+        </v-btn>
+    </div>
+</template>
+
+<script>
+import axiosInstance from '@/utils/axiosInstance';
+import Swal from 'sweetalert2';
 
 export default {
     data: () => ({
@@ -15,7 +27,7 @@ export default {
               toast.addEventListener('mouseenter', Swal.stopTimer)
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
-          })
+        })
     }),
     methods: {
         async logout() {
@@ -33,8 +45,9 @@ export default {
             })
         }
     },
-    components: {
-      SideBar,
-      LogoutComponent
-    }
 }
+</script>
+
+<style>
+
+</style>

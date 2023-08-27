@@ -1,36 +1,15 @@
 <script>
-import axiosInstance from '@/utils/axiosInstance'
 export default {
     data: () => ({
         selectItem: 10,
         drawer: null,
         items: [
-            { icon: 'mdi-view-dashboard-outline', text: 'Dashboard', to: '/dashboard' },
-            { icon: 'mdi-gesture-tap', text: 'Active exams', to: '/active-exams' },
-            { icon: 'mdi-alpha-p-box-outline', text: 'Passed exams', to: '/passed-exams' },
-            { icon: 'mdi-logout', text: 'Logout', to: '/login' },
+            { icon: 'mdi-view-dashboard-outline', text: 'Dashboard', to: '/home' },
+            { icon: 'mdi-ab-testing', text: 'Exams', to: '/exams' },
+            { icon: 'mdi-alpha-p-box-outline', text: 'Passed', to: '/passed-exams' },
         ]
 
     }),
-    methods: {
-        async logout() {
-            await axiosInstance.delete('/auth/logout/')
-            .then(() => {
-                localStorage.removeItem('token')
-                this.$router.push('/login')
-                this.Toast.fire({
-                    icon: 'success',
-                    title: 'Student is logged out'
-                  })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        },
-        async goTo(link) {
-            this.$router.push(link)
-        }
-    },
     props: {},
     components: {
     },
@@ -38,7 +17,7 @@ export default {
 </script>
 
 <template>
-    <v-navigation-drawer v-model="drawer" app color="#323B50" width="250">
+    <v-navigation-drawer v-model="drawer" app color="white" width="250" style="box-shadow: 0 40px 40px 0 rgba(0, 0, 0, 0.2)">
         <v-list flat class="mt-5">
             <v-list-item-group v-model="selectItem" mandatory>
                 <v-list-item 
@@ -46,7 +25,7 @@ export default {
                     :key="i"
                     v-slot="{active}"
                     :ripple="false"
-                    @click="item.text === 'Logout' ? logout() : goTo(item.to)"
+                    :to="item.to"
                 >
                     <v-list-item-icon>
                         <div :class="active ? 'a' : ''"></div>

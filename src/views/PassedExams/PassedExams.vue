@@ -3,7 +3,7 @@
     <SideBar/>
     <v-container fluid>
         <v-row no-gutters class="ma-5">
-            Home
+            PassedExams
             <v-spacer />
             <LogoutComponent/>
         </v-row>
@@ -11,6 +11,6 @@
     </v-app>
 </template>
 
-<script src="./HomePage.js"/>
+<script src="./PassedExams.js"/>
 
-<style scoped src="./HomePage.css"/>
+<style scoped src="./PassedExams.css"/>
