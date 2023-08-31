@@ -29,16 +29,10 @@
                     >
                         {{ item.description }}
                     </v-card-title>
-                    <v-card-title 
-                        class="pa-0 mt-2 subject"
-                        style="font-weight: 400; font-size: 20px; color: #4FBA5E"
-                    >
-                        {{ item.subject }}
-                    </v-card-title>
                 </div>
                 <v-spacer/>
                 <div class="exam-duration ml-4">
-                    {{ item.duration }}
+                    {{ item.time }}
                 </div>
             </v-card>
     </v-container>

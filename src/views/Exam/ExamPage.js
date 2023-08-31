@@ -17,24 +17,18 @@ export default {
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
         }),
-        exams: [
-          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
-          { name: 'Exam name', description: 'Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description Exam description', duration: '05.05.05', subject: 'Exam subject' },
-          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
-          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
-          { name: 'Exam name', description: 'Exam description', duration: '05.05.05', subject: 'Exam subject' },
-        ]
+        exams: []
     }),
+    async created() {
+        await this.getActiveExams()
+    },
     methods: {
-        async logout() {
-            await axiosInstance.delete('/auth/logout/')
-            .then(() => {
-                localStorage.removeItem('token')
-                this.$router.push('/login')
-                this.Toast.fire({
-                    icon: 'success',
-                    title: 'Student is logged out'
-                  })
+
+        async getActiveExams() {
+            await axiosInstance.get('/exam/active/')
+            .then((res) => {
+                this.exams = res.data
+                console.log(this.exams)
             })
             .catch((err) => {
                 console.log(err)
@@ -47,3 +41,6 @@ export default {
         SweetalertIcon    
     }
 }
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJwYXNzd29yZCI6InRlc3QiLCJpZCI6OH0.UQGlM8SKAUlUPZw6sp-BuOMX5n_Ix_qOirS7adFkOFg     test
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFyc2xhbiIsInBhc3N3b3JkIjoiYXJzbGFuIiwiaWQiOjl9.vstm-rOsjHvSa-aiqtoq7xgeM6VehuBdDBfjOnBkgXs   arslan
